@@ -6,7 +6,6 @@ export function Highlights() {
                 backgroundImage: "url('/highlights.jpg')"
             }}
         >
-           
         </div>
 
     )
