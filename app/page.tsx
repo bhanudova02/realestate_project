@@ -8,7 +8,7 @@ import { SmallOverView } from "./components/home/SmallOverView";
 
 export default function Home() {
   return (
-    <div>
+    <div className="overflow-hidden">
       <HeaderComponent />
       <HeroComponent />
       <SmallOverView />
