@@ -15,7 +15,9 @@ export default function Home() {
       <SmallOverViewNew />
       <GalleryComponent />
       <ClubHouse />
-      <Highlights/>
+      <div className="overflow-hidden">
+    <Highlights />
+</div>
       <ContactForm />
       <Footer />
     </div>
