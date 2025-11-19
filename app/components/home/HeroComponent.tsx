@@ -38,9 +38,9 @@ export default function HeroComponent() {
       <button
         onClick={handleScrollDown}
         aria-label="Scroll down"
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 p-2 rounded-full bg-black/20 hover:bg-black/30 text-white animate-bounce"
+        className="cursor-pointer absolute bottom-6 left-1/2 -translate-x-1/2 z-30 p-2 rounded-full bg-black/20 hover:bg-black/30 text-white animate-bounce"
       >
-        <ChevronDown size={36} />
+        <ChevronDown className="w-5 md:w-10 h-5 md:h-10" />
       </button>
     </div>
   );
