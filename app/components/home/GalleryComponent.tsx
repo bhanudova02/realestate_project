@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { ZoomIn, X } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 type GalleryImage = {
     url: string;
@@ -13,6 +15,14 @@ const GalleryComponent: React.FC = () => {
 
     useEffect(() => {
         setIsVisible(true);
+
+        AOS.init({
+            duration: 900,
+            once: true,
+            offset: 80,
+            easing: "ease-out",
+        });
+        AOS.refresh();
     }, []);
 
     const images: GalleryImage[] = [
@@ -43,8 +53,8 @@ const GalleryComponent: React.FC = () => {
         <div className="min-h-screen bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
                 <h1
-                    className={`text-4xl font-medium text-center text-gray-800 mb-6 transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
-                        }`}
+                    data-aos="fade-down"
+                    className={`text-4xl font-medium text-center text-gray-800 mb-6`}
                 >
                     Our Gallery
                 </h1>
@@ -53,17 +63,18 @@ const GalleryComponent: React.FC = () => {
                     {images.map((image, index) => (
                         <div
                             key={index}
-                            className={`break-inside-avoid group cursor-pointer transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
-                                }`}
-                            style={{ transitionDelay: `${index * 100}ms` }}
+                            data-aos="fade-up"
+                            data-aos-delay={index * 80}
+                            className={`break-inside-avoid group cursor-pointer`}
                             onClick={() => openModal(image)}
                         >
                             <div className="relative overflow-hidden rounded-lg bg-gray-200 transition-all duration-500 ease-in-out hover:shadow-2xl hover:scale-105">
                                 <img
                                     src={image.url}
-                                    alt={image.url}
+                                    alt=""
                                     className={`w-full ${image.height} object-cover transition-all duration-700 ease-in-out group-hover:scale-110 group-hover:brightness-75`}
                                 />
+
                                 <div className="absolute inset-0 bg-gray-900 opacity-0 transition-opacity duration-500 group-hover:opacity-20"></div>
 
                                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -79,8 +90,9 @@ const GalleryComponent: React.FC = () => {
 
             {selectedImage && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4 animate-in fade-in duration-300"
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4"
                     onClick={closeModal}
+                    data-aos="zoom-in"
                 >
                     <button
                         onClick={closeModal}
@@ -90,13 +102,14 @@ const GalleryComponent: React.FC = () => {
                     </button>
 
                     <div
-                        className="relative max-w-7xl max-h-[90vh] animate-in zoom-in duration-300"
+                        className="relative max-w-7xl max-h-[90vh]"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <img
                             src={selectedImage.url}
-                            alt={selectedImage.url}
+                            alt=""
                             className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+                            data-aos="zoom-in"
                         />
                     </div>
                 </div>
