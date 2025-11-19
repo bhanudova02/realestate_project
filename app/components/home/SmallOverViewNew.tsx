@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
 import AOS from "aos";
-export function CloubHouse() {
+export function SmallOverViewNew() {
     const ref = useRef(null);
     const [inView, setInView] = useState(false);
 
@@ -83,7 +83,7 @@ export function CloubHouse() {
                                 data-aos-delay="0"
                                 className="text-4xl lg:text-5xl font-medium text-gray-800"
                             >
-                                Welcome to Our Clubhouse
+                                Welcome to Our OverView
                             </h2>
 
                             <p
@@ -109,7 +109,7 @@ export function CloubHouse() {
                         {/* CTA Button */}
                         <div
                             data-aos="fade-up"
-                            data-aos-delay="450"
+                            data-aos-delay="150"
                             className="pt-4"
                         >
                             <button className="bg-gray-800 text-white px-8 py-4 rounded-full text-base font-medium hover:bg-gray-700 transition-colors duration-300">
@@ -122,7 +122,7 @@ export function CloubHouse() {
 
                             <div
                                 data-aos="fade-up"
-                                data-aos-delay="600"
+                                data-aos-delay="10"
                                 className="space-y-1"
                             >
                                 <p className="text-3xl font-medium text-gray-800">{members}+</p>
@@ -131,7 +131,7 @@ export function CloubHouse() {
 
                             <div
                                 data-aos="fade-up"
-                                data-aos-delay="750"
+                                data-aos-delay="50"
                                 className="space-y-1"
                             >
                                 <p className="text-3xl font-medium text-gray-800">{amenities}+</p>
@@ -140,7 +140,7 @@ export function CloubHouse() {
 
                             <div
                                 data-aos="fade-up"
-                                data-aos-delay="900"
+                                data-aos-delay="100"
                                 className="space-y-1"
                             >
                                 <p className="text-3xl font-medium text-gray-800">{access}/7</p>

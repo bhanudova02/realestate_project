@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import AOS from "aos";
-export function SmallOverView() {
+export function ClubHouse() {
     useEffect(() => {
         AOS.init({
             duration: 1000,  // smooth animation
@@ -10,11 +10,17 @@ export function SmallOverView() {
     }, []);
 
     return (
-        <div className="bg-white py-14 px-4">
-            <div className="space-y-8 w-full max-w-6xl mx-auto">
+        <div
+            className="relative py-14 px-4 bg-cover bg-center bg-no-repeat bg-fixed"
+            style={{
+                backgroundImage: "url('/bg_1.jpg')"
+            }}
+        >
+            <div className="absolute inset-0 bg-black/80"></div>
+            <div className="space-y-8 w-full max-w-6xl mx-auto relative z-10">
                 <div className="text-center space-y-2">
-                    <h3 data-aos="zoom-in" className="text-4xl font-medium text-center text-gray-800 ">Architectural agency</h3>
-                    <p data-aos="fade-left" className="text-base text-zinc-700 max-w-3xl mx-auto">
+                    <h3 data-aos="zoom-in" className="text-4xl font-medium text-center text-white ">ClubHouse</h3>
+                    <p data-aos="fade-left" className="text-base text-white max-w-3xl mx-auto">
                         Sample text. Click to select the text box. Click again or double click to start editing the text.
                     </p>
                 </div>
@@ -211,6 +217,6 @@ export function SmallOverView() {
                 </div>
 
             </div>
-        </div>
+        </div >
     )
 }

@@ -1,19 +1,21 @@
 import { HeaderComponent } from "./components/HeaderComponent";
 import HeroComponent from "./components/home/HeroComponent";
-import { CloubHouse } from "./components/home/CloubHouse";
+import { SmallOverViewNew } from "./components/home/SmallOverViewNew";
 import { ContactForm } from "./components/home/ContactForm";
 import { Footer } from "./components/Footer";
 import GalleryComponent from "./components/home/GalleryComponent";
-import { SmallOverView } from "./components/home/SmallOverView";
+import { ClubHouse } from "./components/home/ClubHouse";
+import { Highlights } from "./components/home/Highlights";
 
 export default function Home() {
   return (
     <div className="overflow-hidden">
       <HeaderComponent />
       <HeroComponent />
-      <SmallOverView />
-      <CloubHouse />
+      <SmallOverViewNew />
       <GalleryComponent />
+      <ClubHouse />
+      <Highlights/>
       <ContactForm />
       <Footer />
     </div>
