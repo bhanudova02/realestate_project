@@ -1,6 +1,7 @@
-"use client"
-import { useState, useEffect } from 'react';
-import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
+"use client";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { useState, useEffect } from "react";
+import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 
 export function HeaderComponent() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -11,76 +12,58 @@ export function HeaderComponent() {
             const scrollPosition = window.scrollY;
             const windowWidth = window.innerWidth;
 
-            // Match your HeroComponent heights:
-            // Mobile: 60vh, Tablet (md): 40vh, Desktop (lg): 100vh
             let heroHeight;
             if (windowWidth < 768) {
-                // Mobile
                 heroHeight = window.innerHeight * 0.6;
             } else if (windowWidth < 1024) {
-                // Tablet (md)
                 heroHeight = window.innerHeight * 0.4;
             } else {
-                // Desktop (lg)
                 heroHeight = window.innerHeight;
             }
 
-            // Change header when scrolled past 80% of hero height
-            if (scrollPosition > heroHeight * 0.6) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
+            setIsScrolled(scrollPosition > heroHeight * 0.6);
         };
-        // Run on mount and scroll
-        handleScroll();
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleScroll);
 
-        // Cleanup
+        handleScroll();
+        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("resize", handleScroll);
+
         return () => {
-            window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('resize', handleScroll);
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleScroll);
         };
     }, []);
 
-    // Prevent body scroll when menu is open
+    // Disable scrolling when sidebar open
     useEffect(() => {
-        if (isMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-        return () => {
-            document.body.style.overflow = 'unset';
-        };
+        document.body.style.overflow = isMenuOpen ? "hidden" : "unset";
     }, [isMenuOpen]);
 
     const menuItems = [
-        { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about' },
-        { name: 'Project', href: '#project' },
-        { name: 'Specification', href: '#specification' },
-        { name: 'Location', href: '#location' },
-        { name: 'Contact', href: '#contact' },
+        { name: "Home", href: "#home" },
+        { name: "About", href: "#about" },
+        { name: "Project", href: "#project" },
+        { name: "Specification", href: "#specification" },
+        { name: "Location", href: "#location" },
+        { name: "Contact", href: "#contact" },
     ];
 
     return (
         <>
+            {/* ==== HEADER ==== */}
             <header className="fixed w-full z-50 transition-all duration-300">
-                <div className={`flex justify-between items-center px-4 py-1.5 border-gray-100 shadow transition-all duration-300 ${isScrolled
-                    ? 'bg-white text-black'
-                    : 'bg-white/10 text-white'
-                    }`}>
+                <div
+                    className={`flex justify-between items-center px-4 py-1.5 shadow transition-all duration-300 ${isScrolled ? "bg-white text-black" : "bg-white/10 text-white"
+                        }`}
+                >
                     <div>
                         <a
                             href="#home"
                             onClick={(e) => {
                                 e.preventDefault();
                                 window.scrollTo({ top: 0, behavior: "smooth" });
-                                window.location.hash = "home"; // optional
+                                window.location.hash = "home";
                             }}
-                            className="cursor-pointer"
                         >
                             <img
                                 src="./logo.svg"
@@ -92,66 +75,113 @@ export function HeaderComponent() {
                         </a>
                     </div>
 
-                    <div>
-                        <button onClick={() => setIsMenuOpen(true)} className='cursor-pointer'>
-                            <RiMenu3Line className="text-2xl" />
-                        </button>
-                    </div>
+                    <button onClick={() => setIsMenuOpen(true)}>
+                        <RiMenu3Line className="text-2xl" />
+                    </button>
                 </div>
             </header>
 
-            {/* Sidebar Menu */}
-            <div
-                className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] transition-opacity duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-                    }`}
-                onClick={() => setIsMenuOpen(false)}
-            >
-                <div
-                    className={`fixed top-0 right-0 h-full w-full bg-white transform transition-transform duration-500 ease-in-out overflow-y-auto ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-                        }`}
-                    onClick={(e) => e.stopPropagation()}
-                >
-                    {/* Close Button */}
-                    <div className="flex justify-end p-6">
-                        <button
-                            onClick={() => setIsMenuOpen(false)}
-                            className="text-gray-800 hover:text-gray-600 transition-colors cursor-pointer"
-                        >
-                            <RiCloseLine className="text-4xl" />
-                        </button>
-                    </div>
+            {/* ==== SIDEBAR OVERLAY ==== */}
+            {isMenuOpen && (
+                <div className="fixed inset-0 bg-black/70 z-50 transition-all duration-500">
+                    <div className="grid grid-cols-2 h-full">
 
-                    {/* Menu Items */}
-                    <nav className="flex flex-col items-center justify-center h-[calc(100%-100px)] space-y-8">
-                        {menuItems.map((item, index) => (
-                            <a
-                                key={item.name}
-                                href={item.href}
+                        {/* LEFT SIDE */}
+                        <div className="h-full bg-zinc-400 text-white relative">
+
+                            <div className="absolute left-4 top-4">
+                                <img
+                                    src="./logo.svg"
+                                    width={100}
+                                    height={100}
+                                    alt="logo"
+                                    className="w-16"
+                                />
+                            </div>
+
+                            <div className="absolute bottom-4 left-4 flex flex-col gap-4">
+                                <div className="w-8 h-8 p-1 rounded-full bg-gray-700 flex justify-center items-center">
+                                    <Facebook className="w-4" />
+                                </div>
+                                <div className="w-8 h-8 p-1 rounded-full bg-gray-700 flex justify-center items-center">
+                                    <Instagram className="w-4" />
+                                </div>
+                                <div className="w-8 h-8 p-1 rounded-full bg-gray-700 flex justify-center items-center">
+                                    <Linkedin className="w-4" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {/* RIGHT SIDE (Menu) */}
+                        <div className="bg-white h-full relative">
+
+                            <button
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-4xl md:text-5xl lg:text-4xl font-medium text-gray-800 hover:text-gray-500 transition-all duration-300 transform hover:scale-105"
-                                style={{
-                                    animation: isMenuOpen ? `slideIn 0.5s ease-out ${index * 0.1}s both` : 'none'
-                                }}
+                                className="absolute right-2 top-2"
                             >
-                                {item.name}
-                            </a>
-                        ))}
-                    </nav>
-                </div>
-            </div>
+                                <RiCloseLine className="text-4xl text-gray-700" />
+                            </button>
 
+                            <div className="h-full flex justify-center items-center">
+                                <nav className="flex flex-col items-center space-y-8">
+                                    {menuItems.map((item, index) => (
+                                        <a
+                                            key={item.name}
+                                            href={item.href}
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="text-4xl md:text-5xl lg:text-4xl font-medium text-gray-800 hover:text-gray-500 transition-all duration-300 hover:scale-105"
+                                            style={{
+                                                animation: `slideIn 0.5s ease-out ${index * 0.1}s both`,
+                                            }}
+                                        >
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </nav>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* ANIMATION */}
             <style jsx>{`
                 @keyframes slideIn {
-                    from {
-                        opacity: 0;
-                        transform: translateX(50px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateX(0);
-                    }
+                    from { opacity: 0; transform: translateX(50px); }
+                    to { opacity: 1; transform: translateX(0); }
                 }
-            `}</style>
+
+                @keyframes leftSlide {
+                    from { transform: translateX(-100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+
+                @keyframes rightSlide {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+
+                .animate-leftSlide {
+                    animation: leftSlide 0.45s ease-out;
+                }
+
+                .animate-rightSlide {
+                    animation: rightSlide 0.45s ease-out;
+                }
+
+                .animate-fadeIn {
+                    animation: fadeIn 0.4s ease-out;
+                }
+            `}
+            </style>
+
         </>
     );
 }
