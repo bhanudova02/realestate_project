@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import GalleryComponent from "./components/home/GalleryComponent";
 import { ClubHouse } from "./components/home/ClubHouse";
 import { Highlights } from "./components/home/Highlights";
+import NewClubHouse from "./components/home/NewClubHouse";
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
       <SmallOverViewNew />
       <GalleryComponent />
       <ClubHouse />
-      <Highlights />
+      <NewClubHouse/>
       <ContactForm />
       <Footer />
     </div>
